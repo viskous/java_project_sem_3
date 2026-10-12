@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const adminController_1 = require("../controllers/adminController");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const router = (0, express_1.Router)();
+router.use(authMiddleware_1.authenticateJWT);
+router.use((0, authMiddleware_1.requireRole)(['admin']));
+router.get('/stats', adminController_1.getAdminStats);
+router.get('/users', adminController_1.getUsers);
+router.patch('/loans/:id', adminController_1.updateLoanStatus);
+router.post('/freeze-user', adminController_1.freezeUserAccount);
+router.get('/audit-logs', adminController_1.getAuditLogs);
+exports.default = router;

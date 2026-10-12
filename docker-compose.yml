@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  capital-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: capital-core-bank
+    ports:
+      - "5001:5001"
+      - "3000:3000"
+    environment:
+      - PORT=5001
+      - NODE_ENV=production
+      - JWT_SECRET=capital_core_prod_sec_key_994012
+    restart: always

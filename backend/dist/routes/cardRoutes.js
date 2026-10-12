@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cardController_1 = require("../controllers/cardController");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const router = (0, express_1.Router)();
+router.use(authMiddleware_1.authenticateJWT);
+router.get('/', cardController_1.getCards);
+router.post('/create', cardController_1.createCard);
+router.patch('/:id/toggle-freeze', cardController_1.toggleFreezeCard);
+router.patch('/:id/toggle-feature', cardController_1.toggleCardFeature);
+exports.default = router;
